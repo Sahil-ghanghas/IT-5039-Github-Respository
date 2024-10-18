@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NZ Tax Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            max-width: 400px;
+        }
+        h1 {
+            text-align: center;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Simple Tax Calculator</h1>
+<label for="salary">Enter your annual income in the box below:</label>
+<input type="number" id="salary" placeholder="Salary" required>
+
+<button onclick="calculateTax()">Calculate Tax</button>
+
+<div id="result"></div>
+
+<script>
+    function calculateTax() {
+        const salary = parseFloat(document.getElementById("salary").value);
+        let tax = 0;
+
+        // New Zealand tax rates
+        if (salary <= 15600) {
+            tax = salary * 0.10; 
+        } else if (salary <= 53500) {
+            tax = 1400 + (salary - 15600) * 0.17; 
+        } else if (salary <= 78100) {
+            tax = 7540 + (salary - 53500) * 0.30; 
+        } else {
+            tax = 15440 + (salary - 78100) * 0.33;
+        }
+
+        document.getElementById("result").innerText = `Your estimated tax is: $${tax.toFixed(2)}`;
+    }
+</script>
+
+</body>
+</html>
